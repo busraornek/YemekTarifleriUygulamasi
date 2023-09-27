@@ -10,8 +10,6 @@ class RetrofitClient {
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-
-
         }
     }
 }

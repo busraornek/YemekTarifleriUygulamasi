@@ -13,10 +13,29 @@
         <action
             android:id="@+id/action_homePageFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_addRecipeFragment"
+            app:destination="@id/addRecipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.busraornek.yemektarifleriuygulamasi.ui.fragment.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+        <argument
+            android:name="repices"
+            app:argType="com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeFragment"
+        android:name="com.busraornek.yemektarifleriuygulamasi.ui.fragment.AddRecipeFragment"
+        android:label="fragment_add_recipe"
+        tools:layout="@layout/fragment_add_recipe" >
+        <action
+            android:id="@+id/action_addRecipeFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
 </navigation>

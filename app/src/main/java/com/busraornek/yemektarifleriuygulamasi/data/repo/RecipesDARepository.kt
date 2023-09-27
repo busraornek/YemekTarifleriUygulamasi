@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesAnswer
+import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesX
+import com.busraornek.yemektarifleriuygulamasi.retrofit.BaseRecipes
+import com.busraornek.yemektarifleriuygulamasi.retrofit.RecipeRequest
 import com.busraornek.yemektarifleriuygulamasi.retrofit.RecipesDao
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,7 +25,46 @@ class RecipesDARepository(var kdao:RecipesDao) {
         kdao.recipes().enqueue(object : Callback<RecipesAnswer> {
             override fun onResponse(call: Call<RecipesAnswer>?, response: Response<RecipesAnswer>) {
                 val list = response.body()!!.recipes
+                recipesArray.value = list
+            }
+            override fun onFailure(call: Call<RecipesAnswer>?, t: Throwable?) {
+            }
+        })
 
+    }
+
+    fun foodSearch(foodSearch:String){
+        kdao.foodSearch(foodSearch).enqueue(object : Callback<RecipesX>{
+            override fun onResponse(call: Call<RecipesX>, response: Response<RecipesX>) {
+                val list = response.body()!!.recipes
+               recipesArray.value =list
+            }
+
+            override fun onFailure(call: Call<RecipesX>, t: Throwable) {}
+
+
+        })
+    }
+
+    fun recipeAdd(recipe: RecipeRequest){
+        kdao.addRecipe(recipe).enqueue(object : Callback<BaseRecipes> {
+            override fun onResponse(call: Call<BaseRecipes>, response: Response<BaseRecipes>) {
+                val response = response.body()
+                Log.e("Add"," ${response?.message} - ${response?.success}")
+                getAllRecipes()
+            }
+
+            override fun onFailure(call: Call<BaseRecipes>, t: Throwable) {
+            }
+
+        })
+    }
+
+    fun getAllRecipes(){
+
+        kdao.recipes().enqueue(object : Callback<RecipesAnswer> {
+            override fun onResponse(call: Call<RecipesAnswer>?, response: Response<RecipesAnswer>) {
+                val list = response.body()!!.recipes
                 recipesArray.value = list
             }
 
@@ -30,7 +72,6 @@ class RecipesDARepository(var kdao:RecipesDao) {
             }
 
         })
-        Log.e("veriler","${kdao.recipes()}")
+       
     }
-
 }

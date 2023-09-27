@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="homePageToolbar" type="String" />
+        <variable name="homePageFragment" type="com.busraornek.yemektarifleriuygulamasi.ui.fragment.HomePageFragment" />
+        <variable name="recipesAdapter" type="com.busraornek.yemektarifleriuygulamasi.ui.adapter.RecipesAdapter" />
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ui.fragment.HomePageFragment">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/light_background"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
@@ -15,13 +32,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floating_btn">
+        app:layout_constraintTop_toBottomOf="@+id/fab">
 
         <ImageButton
             android:id="@+id/home_img"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/fav_img"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,26 +60,16 @@
         android:layout_width="409dp"
         android:background="#EA7F76"
         android:layout_height="wrap_content"
-
-
-
+        app:titleTextColor="@color/white"
+        app:title="@{homePageToolbar}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/light_background"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarHome" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:adapter="@{recipesAdapter}"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
@@ -72,14 +78,16 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbarHome" />
 
     <ImageButton
-        android:id="@+id/floating_btn"
+        android:id="@+id/fab"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="64dp"
-
+        android:clickable="true"
+        android:onClick="@{() -> homePageFragment.addRecipe(fab)}"
         android:src="@drawable/float_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

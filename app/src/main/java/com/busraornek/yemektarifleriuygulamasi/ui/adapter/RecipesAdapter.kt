@@ -3,7 +3,9 @@ package com.busraornek.yemektarifleriuygulamasi.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.busraornek.yemektarifleriuygulamasi.R
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.databinding.HomeCardBinding
 
@@ -18,7 +20,9 @@ class RecipesAdapter(var mContex:Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesignHolder {
-        val design = HomeCardBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val layoutInflater = LayoutInflater.from(mContex)
+
+        val design: HomeCardBinding = DataBindingUtil.inflate(layoutInflater,R.layout.home_card,parent,false)
         return CardDesignHolder(design)
     }
 
@@ -29,10 +33,10 @@ class RecipesAdapter(var mContex:Context,
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
         val repices = recipesList.get(position)
 
-        holder.design.textViewName.text = "${repices.name}"
+       holder.design.selectedRecipe = repices
 
-      //  holder.design.textView2.setOnClickListener {
-        //    Navigation.findNavController(it).navigate(R.id.action_homePageFragment_to_detailFragment)
-       // }
+
+
+
     }
 }

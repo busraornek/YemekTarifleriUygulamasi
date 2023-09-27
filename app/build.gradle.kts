@@ -11,9 +11,9 @@ android {
     namespace = "com.busraornek.yemektarifleriuygulamasi"
     compileSdk = 34
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
-
+        dataBinding = true
     }
 
     defaultConfig {

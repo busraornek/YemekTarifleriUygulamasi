@@ -1,6 +1,5 @@
 package com.busraornek.yemektarifleriuygulamasi.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
@@ -17,10 +16,10 @@ class HomePageViewModel @Inject constructor(var krepo : RecipesDARepository) : V
     }
     fun uploadRecipe(){
         krepo.repicesGet()
-
-
     }
-
+    fun search(searchWord:String){
+        krepo.foodSearch(searchWord)
+    }
 }
 
 
