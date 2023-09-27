@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="main_color" format="color"/>
+    <attr name="second_color" format="color"/>
+    <attr name="small_txt_color" format="color"/>
+    <attr name="big_txt_color" format="color"/>
+    <attr name="txt_card" format="color"/>
+    <attr name="card_background" format="color"/>
+    <attr name="stroke_card" format="color"/>
+    <attr name="bottom_mune_color" format="color"/>
+
+    <attr name="main_background" format="reference"/>
+</resources>

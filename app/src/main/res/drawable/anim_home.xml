@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/green"
+        android:drawable="@drawable/home_t"
+        android:state_checked="true"/>
+    <item
+        android:id="@+id/gray"
+        android:drawable="@drawable/home" />
+    <transition
+        android:fromId="@id/green"
+        android:toId="@id/gray"
+        android:drawable="@drawable/home_t_f"/>
+
+    <transition
+        android:fromId="@id/gray"
+        android:toId="@id/green"
+        android:drawable="@drawable/home_f_t"/>
+
+</animated-selector>

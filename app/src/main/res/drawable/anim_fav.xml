@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/green"
+        android:drawable="@drawable/fav_t"
+        android:state_checked="true"/>
+    <item
+        android:id="@+id/gray"
+        android:drawable="@drawable/fav" />
+    <transition
+        android:fromId="@id/green"
+        android:toId="@id/gray"
+        android:drawable="@drawable/fav_t_f"/>
+
+    <transition
+        android:fromId="@id/gray"
+        android:toId="@id/green"
+        android:drawable="@drawable/fav_f_t"/>
+</animated-selector>
