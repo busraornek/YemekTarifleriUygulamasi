@@ -87,6 +87,10 @@ class HomePageFragment : Fragment(),SearchView.OnQueryTextListener {
         viewModel.search(newText)
         return true
     }
+    override fun onResume() {
+        super.onResume()
+        viewModel.uploadRecipe()
+    }
 
 
 }

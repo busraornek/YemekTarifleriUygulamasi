@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesAnswer
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesX
-import com.busraornek.yemektarifleriuygulamasi.retrofit.BaseRecipes
-import com.busraornek.yemektarifleriuygulamasi.retrofit.RecipeRequest
+import com.busraornek.yemektarifleriuygulamasi.data.entity.BaseRecipes
+import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipeRequest
 import com.busraornek.yemektarifleriuygulamasi.retrofit.RecipesDao
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,34 +44,51 @@ class RecipesDARepository(var kdao:RecipesDao) {
 
 
         })
-    }
-
-    fun recipeAdd(recipe: RecipeRequest){
+    }fun recipeAdd(recipe: RecipeRequest){
         kdao.addRecipe(recipe).enqueue(object : Callback<BaseRecipes> {
             override fun onResponse(call: Call<BaseRecipes>, response: Response<BaseRecipes>) {
                 val response = response.body()
-                Log.e("Add"," ${response?.message} - ${response?.success}")
+                Log.e("Add"," ${response?.message} - ${response?.status}")
                 getAllRecipes()
             }
-
             override fun onFailure(call: Call<BaseRecipes>, t: Throwable) {
             }
-
-        })
-    }
-
-    fun getAllRecipes(){
-
+        }) }fun getAllRecipes(){
         kdao.recipes().enqueue(object : Callback<RecipesAnswer> {
             override fun onResponse(call: Call<RecipesAnswer>?, response: Response<RecipesAnswer>) {
                 val list = response.body()!!.recipes
                 recipesArray.value = list
             }
-
             override fun onFailure(call: Call<RecipesAnswer>?, t: Throwable?) {
+            }
+        })
+    }fun recipeUpdate(recipe:Recipes) {
+        kdao.recipeUpdate(recipe).enqueue(object : Callback<BaseRecipes>{
+            override fun onResponse(call: Call<BaseRecipes>, response: Response<BaseRecipes>) {
+                val succes = response.body()?.status
+                val mesage = response.body()?.message
+                Log.e("yemek detay", "$succes - $mesage")
+                repicesGet()
+            }
+            override fun onFailure(call: Call<BaseRecipes>, t: Throwable) {
             }
 
         })
-       
+
+    }
+    fun recipeDetail(id:Int){
+        kdao.recipeDetail(id).enqueue(object : Callback<RecipesAnswer>{
+            override fun onResponse(call: Call<RecipesAnswer>, response: Response<RecipesAnswer>) {
+                val succes = response.body()?.status
+                val mesage = response.body()?.message
+                Log.e("yemek detay", "$succes - $mesage")
+                repicesGet()
+            }
+
+            override fun onFailure(call: Call<RecipesAnswer>, t: Throwable) {
+                
+            }
+
+        })
     }
 }

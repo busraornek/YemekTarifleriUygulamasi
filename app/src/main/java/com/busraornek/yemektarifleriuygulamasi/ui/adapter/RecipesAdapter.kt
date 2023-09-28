@@ -3,13 +3,17 @@ package com.busraornek.yemektarifleriuygulamasi.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.busraornek.yemektarifleriuygulamasi.R
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.databinding.HomeCardBinding
-
+import com.busraornek.yemektarifleriuygulamasi.ui.fragment.HomePageFragmentDirections
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.HomePageViewModel
+import com.busraornek.yemektarifleriuygulamasi.util.toggle
+import com.google.android.material.snackbar.Snackbar
 
 class RecipesAdapter(var mContex:Context,
                      var recipesList:List<Recipes>,
@@ -33,10 +37,21 @@ class RecipesAdapter(var mContex:Context,
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
         val repices = recipesList.get(position)
 
-       holder.design.selectedRecipe = repices
+          holder.design.recipeObj= repices
+
+
+      holder.design.imageViewDart.setOnClickListener {
+          val gecis = HomePageFragmentDirections.actionHomePageFragmentToRecipeUpdateFragment(recipes = repices)
+          Navigation.toggle(it,gecis)
+      }
+
+
 
 
 
 
     }
 }
+
+
+

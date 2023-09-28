@@ -20,6 +20,8 @@ class HomePageViewModel @Inject constructor(var krepo : RecipesDARepository) : V
     fun search(searchWord:String){
         krepo.foodSearch(searchWord)
     }
+
+
 }
 
 

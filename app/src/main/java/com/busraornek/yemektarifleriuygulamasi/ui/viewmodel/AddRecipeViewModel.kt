@@ -2,7 +2,7 @@ package com.busraornek.yemektarifleriuygulamasi.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.busraornek.yemektarifleriuygulamasi.data.repo.RecipesDARepository
-import com.busraornek.yemektarifleriuygulamasi.retrofit.RecipeRequest
+import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

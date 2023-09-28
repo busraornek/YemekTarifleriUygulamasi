@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="addRecipesToolbar" type="String" />
-        <variable name="viewModel" type="com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.AddRecipeViewModel" />
+        <variable name="updateRecipesToolbar" type="String" />
+        <variable name="recipeUpdateFragment" type="com.busraornek.yemektarifleriuygulamasi.ui.fragment.RecipeUpdateFragment" />
+        <variable name="recipeObj" type="com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes" />
 
     </data>
 
@@ -28,7 +30,7 @@
             android:id="@+id/toolbarAddRecipes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:title="@{addRecipesToolbar}"
+            app:title="@{updateRecipesToolbar}"
             android:background="@color/darker_main_green"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
@@ -37,7 +39,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-             />
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -55,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:hint="Yemek Adı:"
+                android:text="@{recipeObj.name}"
                 android:textStyle="bold|italic" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,6 +76,7 @@
                 android:id="@+id/editTextRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:text="@{recipeObj.description}"
                 android:hint="Yemek Tarifi:"
                 android:textStyle="bold|italic" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -85,8 +89,8 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="40dp"
             android:backgroundTint="@color/darker_main_green"
-            android:onClick="@{()-> viewModel.buttonAdd(editTextFoodAd.getText().toString(), editTextRecipe.getText().toString())}"
-            android:text="Kaydet"
+            android:onClick="@{()-> recipeUpdateFragment.buttonUpdate(recipeObj.id,editTextFoodAd.getText().toString(), editTextRecipe.getText().toString())}"
+            android:text="Güncelle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
