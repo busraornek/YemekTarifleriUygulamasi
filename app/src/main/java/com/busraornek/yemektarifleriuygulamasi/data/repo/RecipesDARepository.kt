@@ -77,8 +77,10 @@ class RecipesDARepository(var kdao:RecipesDao) {
             override fun onResponse(call: Call<BaseRecipes>, response: Response<BaseRecipes>) {
                 val response = response.body()
 
+               // recipeDetail(recipe.id)
+                Log.e("yemek detay", "$recipe.description - $response.mesage")
                 Log.e("yemek detay", "$response.succes - $response.mesage")
-                repicesGet()
+               //repicesGet()
             }
             override fun onFailure(call: Call<BaseRecipes>, t: Throwable) {
             }

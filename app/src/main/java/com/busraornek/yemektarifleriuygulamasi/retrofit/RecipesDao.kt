@@ -27,12 +27,12 @@ interface RecipesDao {
 
 
     @POST("add_recipe.php")
-    fun addRecipe( @Body request : RecipeRequest): Call<BaseRecipes>
+    fun addRecipe( @Body requestAdd : RecipeRequest): Call<BaseRecipes>
 
 
 
     @POST("update_recipe.php")
-    fun recipeUpdate(@Body request : Recipes): Call<BaseRecipes>
+    fun recipeUpdate(@Body requestUpdate : Recipes): Call<BaseRecipes>
 
 
 

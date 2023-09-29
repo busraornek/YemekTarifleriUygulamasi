@@ -42,22 +42,27 @@ class RecipesAdapter(var mContex:Context,
 
           holder.design.recipeObj= repices
 
-/*
-        holder.design.imageViewUpdate.setOnClickListener {
-            val passing = HomePageFragmentDirections.actionHomePageFragmentToRecipeUpdateFragment(recipes = repices)
-            Navigation.toggle(it,passing)
-            Toast.makeText(mContex,"Tarif Eklendi", Toast.LENGTH_SHORT).show()
-        }
-*/
 
         holder.design.goToDetail.setOnClickListener {
             Log.e ("Recipe Adapter", "satırCard tıklandı")
+            Log.e("detay","${repices.description} - ${repices.name} - ${repices.id} ")
             val passing = HomePageFragmentDirections.actionHomePageFragmentToDetailFragment(recipeId = repices.id)
             Navigation.toggle(it,passing)
+            Log.e("detay","${repices.description} - ${repices.name} ")
+        }
 
+        holder.design.imageViewUpdate.setOnClickListener {
+            Log.e("Liste","${repices.name} - ${repices.id}-${repices.description}-${repices.id}" )
+/*
+            val passing = HomePageFragmentDirections.actionHomePageFragmentToRecipeUpdateFragment(recipes = repices)
+            Navigation.toggle(it,passing)
+
+ */
 
 
         }
+
+
 
 
 

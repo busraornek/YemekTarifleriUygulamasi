@@ -12,6 +12,7 @@ import com.busraornek.yemektarifleriuygulamasi.R
 import com.busraornek.yemektarifleriuygulamasi.databinding.FragmentRecipeUpdateBinding
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.RecipeUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.reflect.GenericDeclaration
 
 @AndroidEntryPoint
 class RecipeUpdateFragment : Fragment() {
@@ -42,8 +43,8 @@ class RecipeUpdateFragment : Fragment() {
         view = tempViewModel
     }
 
-    fun buttonUpdate(recipeId: Int, recipeName: String, recipe: String) {
-        view.recipeUpdate(recipeId,recipeName,recipe)
+    fun buttonUpdate(id: Int, name: String, declaration: String) {
+        view.recipeUpdate(id,name,declaration)
        // detail.view.modelGetRecipeDetail(recipeId)
 
     }

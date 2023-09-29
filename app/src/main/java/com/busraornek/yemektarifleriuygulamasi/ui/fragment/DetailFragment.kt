@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -37,13 +38,15 @@ class DetailFragment : Fragment() {
 
          */
         binding = FragmentDetailBinding.inflate(inflater,container,false)
+        val tempViewModel : DetailViewModel by viewModels ()
+        view = tempViewModel
         binding.detailRecipesToolbar = "Yemek Tarifi"
 
         val recipeId = args.recipeId
         view.modelGetRecipeDetail(recipeId)//Recipe type
 
         view.recipeDetail.observe(viewLifecycleOwner){
-
+     //  Toast.makeText(context,it.id.toString(),Toast.LENGTH_LONG).show()
            // binding.textViewName.text= recipeDetail.name
           //  binding.textViewRecipe.text= recipeDetail.description
             it.let {
@@ -55,13 +58,6 @@ class DetailFragment : Fragment() {
         }
         return binding.root
     }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-       super.onCreate(savedInstanceState)
-       val tempViewModel : DetailViewModel by viewModels ()
-       view = tempViewModel
-   }
 
 
 }
