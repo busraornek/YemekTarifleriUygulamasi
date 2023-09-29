@@ -89,7 +89,6 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="40dp"
             android:backgroundTint="@color/darker_main_green"
-            android:onClick="@{()-> recipeUpdateFragment.buttonUpdate(recipeObj.id,editTextFoodAd.getText().toString(), editTextRecipe.getText().toString())}"
             android:text="Güncelle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

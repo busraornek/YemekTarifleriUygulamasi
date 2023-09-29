@@ -42,7 +42,7 @@ class RecipeUpdateFragment : Fragment() {
         view = tempViewModel
     }
 
-    fun buttonUpdate(recipeId: Int, recipeName: String, recipe: String) {
+    suspend fun buttonUpdate(recipeId: Int, recipeName: String, recipe: String) {
         view.recipeUpdate(recipeId,recipeName,recipe)
        // detail.view.modelGetRecipeDetail(recipeId)
 

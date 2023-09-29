@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.busraornek.yemektarifleriuygulamasi.R
 import com.busraornek.yemektarifleriuygulamasi.databinding.FragmentDetailBinding
@@ -16,52 +18,34 @@ import com.busraornek.yemektarifleriuygulamasi.ui.adapter.RecipesAdapter
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.DetailViewModel
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
-    private lateinit var view:DetailViewModel
-    val args: DetailFragmentArgs by navArgs()
+    private lateinit var view: DetailViewModel
+    private val args: DetailFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        /*
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,false)
+    ): View {
 
-        binding.detailRecipesToolbar = "Yemek Tarifi"
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        val bundle: DetailFragmentArgs  by navArgs()
-        val foodComing = bundle.repices
-        binding.recipeObj = foodComing
-
-         */
-        binding = FragmentDetailBinding.inflate(inflater,container,false)
-        binding.detailRecipesToolbar = "Yemek Tarifi"
+        val tempViewModel: DetailViewModel by viewModels()
+        view = tempViewModel
+        //binding.detailRecipesToolbar = "Yemek Tarifi"
 
         val recipeId = args.recipeId
-        view.modelGetRecipeDetail(recipeId)//Recipe type
 
-        view.recipeDetail.observe(viewLifecycleOwner){
+        viewLifecycleOwner.lifecycleScope.launch {
+            view.recipeDetail(recipeId)
+        }
 
-           // binding.textViewName.text= recipeDetail.name
-          //  binding.textViewRecipe.text= recipeDetail.description
-            it.let {
-                binding.recipeObj = it
-
-            }
-
-
+        view.recipeDetail.observe(viewLifecycleOwner) { recipe ->
+            binding.textViewName.text = recipe?.recipe?.name
+            binding.textViewRecipe.text = recipe?.recipe?.description
         }
         return binding.root
     }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-       super.onCreate(savedInstanceState)
-       val tempViewModel : DetailViewModel by viewModels ()
-       view = tempViewModel
-   }
-
-
 }

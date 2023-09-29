@@ -5,7 +5,9 @@ class ApiUtils {
         val BASE_URL = "https://api.canerture.com/recipes/"
 
         fun getRecipesDao(): RecipesDao {
-            return RetrofitClient.getClient(BASE_URL).create(RecipesDao::class.java)
+            return RetrofitClient.
+            getClient(BASE_URL).
+            create(RecipesDao::class.java)
         }
     }
 }

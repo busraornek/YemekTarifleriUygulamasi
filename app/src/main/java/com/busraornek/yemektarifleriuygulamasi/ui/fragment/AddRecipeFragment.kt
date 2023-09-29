@@ -7,36 +7,50 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.busraornek.yemektarifleriuygulamasi.databinding.FragmentAddRecipeBinding
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.AddRecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddRecipeFragment : Fragment() {
-private lateinit var binding:FragmentAddRecipeBinding
-private lateinit var view:AddRecipeViewModel
+    private lateinit var binding: FragmentAddRecipeBinding
+    private lateinit var viewModel: AddRecipeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAddRecipeBinding.inflate(inflater,container,false)
+    ): View {
+        binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
 
-        binding.buttonAdd.setOnClickListener{
-            view.buttonAdd(binding.editTextFoodName.text.toString(), binding.editTextRecipe.text.toString())
-            val gecis = AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
-            Navigation.findNavController(it).navigate(gecis)
-            Toast.makeText(context,"Tarif Eklendi", Toast.LENGTH_SHORT).show()}
+        val tempViewModel: AddRecipeViewModel by viewModels()
+        viewModel = tempViewModel
 
-        binding.viewModel = view
-        binding.addRecipesToolbar = "Yemek Kayıt"
         return binding.root
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val tempViewModel : AddRecipeViewModel by viewModels ()
-        view = tempViewModel
-    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonAdd.setOnClickListener {
+            val foodName = binding.editTextFoodName.text.toString()
+            val recipe = binding.editTextRecipe.text.toString()
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.addRecipes(foodName, recipe)
+            }
+
+            viewModel.recipeAdd.observe(viewLifecycleOwner) { recipe ->
+                if (recipe != null) {
+                    Toast.makeText(requireContext(), "Yemek Tarifi Eklendi", Toast.LENGTH_SHORT).show()
+                    val action = AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
+                    Navigation.findNavController(it).navigate(action)
+                } else {
+                    Toast.makeText(requireContext(), "Yemek Tarifi Eklenemedi", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 }

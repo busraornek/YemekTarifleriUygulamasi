@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeUpdateViewModel @Inject constructor(var krepo : RecipesDARepository): ViewModel() {
-    fun recipeUpdate(recipeId: Int, recipeName: String, recipe: String){
+    suspend fun recipeUpdate(recipeId: Int, recipeName: String, recipe: String){
         val recipe = Recipes(recipeId,recipeName,recipe)
         krepo.recipeUpdate(recipe)
     }

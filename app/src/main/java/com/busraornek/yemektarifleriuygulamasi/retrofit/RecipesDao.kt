@@ -6,7 +6,7 @@ import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipeRequest
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesAnswer
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesX
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -16,27 +16,19 @@ import retrofit2.http.Query
 interface RecipesDao {
 
     @GET("get_recipes.php")
-    fun recipes(): Call<RecipesAnswer>
-
+    suspend fun recipes(): Response<RecipesAnswer>
 
     @GET("search_recipe.php")
-    fun foodSearch(@Query("query") query:String):Call<RecipesX>
+    suspend fun foodSearch(@Query("query") query: String): Response<RecipesX>
 
     @GET("get_recipe_detail.php")
-    fun recipeDetail(@Query("id") id:Int):Call<DetailResponse>
-
+    suspend fun recipeDetail(@Query("id") id: Int): Response<DetailResponse>
 
     @POST("add_recipe.php")
-    fun addRecipe( @Body request : RecipeRequest): Call<BaseRecipes>
-
+    suspend fun addRecipe(@Body request: RecipeRequest): Response<BaseRecipes>
 
 
     @POST("update_recipe.php")
-    fun recipeUpdate(@Body request : Recipes): Call<BaseRecipes>
-
-
-
-
-
+    suspend fun recipeUpdate(@Body request: Recipes): Response<BaseRecipes>
 
 }
