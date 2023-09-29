@@ -53,6 +53,7 @@ class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
             val passing = HomePageFragmentDirections.actionHomePageFragmentToAddRecipeFragment()
             Navigation.toggle(it, passing)
         }
+        observe()
 
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -73,35 +74,21 @@ class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
         return binding.root
     }
 
-    fun addRecipe(it: View) {
-        Navigation.toggle(R.id.action_homePageFragment_to_addRecipeFragment, it)
-    }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        viewLifecycleOwner.lifecycleScope.launch {
-            if (query != null) {
-                viewModel.foodSearch(query)
-                viewModel.recipeSearch.observe(viewLifecycleOwner) {
-                    adapter = RecipesAdapter(it.recipes, viewModel)
-                    binding.recyclerView.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        viewModel.foodSearch(query)
         return true
     }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        viewLifecycleOwner.lifecycleScope.launch {
-            if (newText != null) {
-                viewModel.foodSearch(newText)
-                viewModel.recipeSearch.observe(viewLifecycleOwner) {
-                    adapter = RecipesAdapter(it.recipes, viewModel)
-                    binding.recyclerView.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        }
+    override fun onQueryTextChange(newText: String): Boolean {
+        viewModel.foodSearch(newText)
         return true
+    }
+    fun observe(){
+        viewModel.recipeSearch.observe(viewLifecycleOwner) {
+            adapter = RecipesAdapter(it.recipes, viewModel)
+            binding.recyclerView.adapter = adapter
+            adapter.notifyDataSetChanged()
+        }
     }
 }

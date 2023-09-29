@@ -34,7 +34,7 @@ class HomePageViewModel @Inject constructor(val krepo: RecipesDARepository) : Vi
         }
     }
 
-    suspend fun foodSearch(searchWord: String) {
+     fun foodSearch(searchWord: String) {
         viewModelScope.launch {
             val response = krepo.foodSearch(searchWord)
             withContext(Dispatchers.Main) {
