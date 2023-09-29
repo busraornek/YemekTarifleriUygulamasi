@@ -42,7 +42,7 @@ class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
         viewModel = tempViewModel
         viewModel.getRecipes()
 
-       // (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHome)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHome)
 
         viewModel.recipesList.observe(viewLifecycleOwner) {
             adapter = RecipesAdapter(it.recipes, viewModel)

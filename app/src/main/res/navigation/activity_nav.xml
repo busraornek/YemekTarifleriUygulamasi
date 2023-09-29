@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_homePageFragment_to_addRecipeFragment"
             app:destination="@id/addRecipeFragment" />
-        <action
-            android:id="@+id/action_homePageFragment_to_recipeUpdateFragment"
-            app:destination="@id/recipeUpdateFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -40,17 +37,6 @@
         tools:layout="@layout/fragment_add_recipe" >
         <action
             android:id="@+id/action_addRecipeFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/recipeUpdateFragment"
-        android:name="com.busraornek.yemektarifleriuygulamasi.ui.fragment.RecipeUpdateFragment"
-        android:label="RecipeUpdateFragment" >
-        <argument
-            android:name="recipes"
-            app:argType="com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes" />
-        <action
-            android:id="@+id/action_recipeUpdateFragment_to_homePageFragment"
             app:destination="@id/homePageFragment" />
     </fragment>
 </navigation>
