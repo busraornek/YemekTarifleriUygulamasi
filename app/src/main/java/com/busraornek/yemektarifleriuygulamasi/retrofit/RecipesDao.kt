@@ -1,6 +1,7 @@
 package com.busraornek.yemektarifleriuygulamasi.retrofit
 
 import com.busraornek.yemektarifleriuygulamasi.data.entity.BaseRecipes
+import com.busraornek.yemektarifleriuygulamasi.data.entity.DetailResponse
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipeRequest
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesAnswer
@@ -22,7 +23,7 @@ interface RecipesDao {
     fun foodSearch(@Query("query") query:String):Call<RecipesX>
 
     @GET("get_recipe_detail.php")
-    fun recipeDetail(@Query("id") id:Int):Call<RecipesAnswer>
+    fun recipeDetail(@Query("id") id:Int):Call<DetailResponse>
 
 
     @POST("add_recipe.php")

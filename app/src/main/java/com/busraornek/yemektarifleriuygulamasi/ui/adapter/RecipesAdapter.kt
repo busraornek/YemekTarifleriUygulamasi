@@ -1,9 +1,11 @@
 package com.busraornek.yemektarifleriuygulamasi.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import com.busraornek.yemektarifleriuygulamasi.R
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.databinding.HomeCardBinding
 import com.busraornek.yemektarifleriuygulamasi.ui.fragment.HomePageFragmentDirections
+import com.busraornek.yemektarifleriuygulamasi.ui.fragment.RecipeUpdateFragmentDirections
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.HomePageViewModel
 import com.busraornek.yemektarifleriuygulamasi.util.toggle
 import com.google.android.material.snackbar.Snackbar
@@ -39,11 +42,22 @@ class RecipesAdapter(var mContex:Context,
 
           holder.design.recipeObj= repices
 
+/*
+        holder.design.imageViewUpdate.setOnClickListener {
+            val passing = HomePageFragmentDirections.actionHomePageFragmentToRecipeUpdateFragment(recipes = repices)
+            Navigation.toggle(it,passing)
+            Toast.makeText(mContex,"Tarif Eklendi", Toast.LENGTH_SHORT).show()
+        }
+*/
 
-      holder.design.imageViewDart.setOnClickListener {
-          val gecis = HomePageFragmentDirections.actionHomePageFragmentToRecipeUpdateFragment(recipes = repices)
-          Navigation.toggle(it,gecis)
-      }
+        holder.design.goToDetail.setOnClickListener {
+            Log.e ("Recipe Adapter", "satırCard tıklandı")
+            val passing = HomePageFragmentDirections.actionHomePageFragmentToDetailFragment(recipeId = repices.id)
+            Navigation.toggle(it,passing)
+
+
+
+        }
 
 
 

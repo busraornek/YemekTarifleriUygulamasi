@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.busraornek.yemektarifleriuygulamasi.R
+import androidx.navigation.Navigation
 import com.busraornek.yemektarifleriuygulamasi.databinding.FragmentAddRecipeBinding
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.AddRecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,21 @@ private lateinit var view:AddRecipeViewModel
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_add_recipe,container,false)
+        binding = FragmentAddRecipeBinding.inflate(inflater,container,false)
+/*
+        binding.buttonAdd.setOnClickListener{
+            view.buttonAdd(binding.editTextFoodAd.text.toString(), binding.editTextRecipe.text.toString())
+            val transition = AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
+            Navigation.findNavController(it).navigate(transition)
+            Toast.makeText(context,"Tarif Eklendi", Toast.LENGTH_SHORT).show()
+        }
+
+ */
+        binding.buttonAdd.setOnClickListener{
+            view.buttonAdd(binding.editTextFoodName.text.toString(), binding.editTextRecipe.text.toString())
+            val gecis = AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
+            Navigation.findNavController(it).navigate(gecis)
+            Toast.makeText(context,"Tarif Eklendi", Toast.LENGTH_SHORT).show()}
 
         binding.viewModel = view
         binding.addRecipesToolbar = "Yemek Kayıt"

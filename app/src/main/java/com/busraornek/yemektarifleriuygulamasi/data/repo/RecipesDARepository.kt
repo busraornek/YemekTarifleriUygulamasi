@@ -6,6 +6,7 @@ import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesAnswer
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipesX
 import com.busraornek.yemektarifleriuygulamasi.data.entity.BaseRecipes
+import com.busraornek.yemektarifleriuygulamasi.data.entity.DetailResponse
 import com.busraornek.yemektarifleriuygulamasi.data.entity.RecipeRequest
 import com.busraornek.yemektarifleriuygulamasi.retrofit.RecipesDao
 import retrofit2.Call
@@ -14,10 +15,19 @@ import retrofit2.Response
 
 class RecipesDARepository(var kdao:RecipesDao) {
 
-    var recipesArray: MutableLiveData<List<Recipes>> = MutableLiveData()
+    var recipesArray: MutableLiveData<List<Recipes>>
+    var recipeDetail: MutableLiveData<Recipes>
+    init {
+        recipesArray = MutableLiveData()
+        recipeDetail = MutableLiveData()
+
+    }
 
     fun bringTheFullRecipe() : MutableLiveData<List<Recipes>>{
         return recipesArray
+    }
+    fun getDetail(): MutableLiveData<Recipes> {
+        return recipeDetail
     }
 
     fun repicesGet(){
@@ -30,7 +40,7 @@ class RecipesDARepository(var kdao:RecipesDao) {
             override fun onFailure(call: Call<RecipesAnswer>?, t: Throwable?) {
             }
         })
-
+     //   return recipeDetail.value
     }
 
     fun foodSearch(foodSearch:String){
@@ -77,18 +87,19 @@ class RecipesDARepository(var kdao:RecipesDao) {
 
     }
     fun recipeDetail(id:Int){
-        kdao.recipeDetail(id).enqueue(object : Callback<RecipesAnswer>{
-            override fun onResponse(call: Call<RecipesAnswer>, response: Response<RecipesAnswer>) {
-                val succes = response.body()?.status
-                val mesage = response.body()?.message
-                Log.e("yemek detay", "$succes - $mesage")
-                repicesGet()
+        kdao.recipeDetail(id).enqueue(object : Callback<DetailResponse>{
+            override fun onResponse(call: Call<DetailResponse>, response: Response<DetailResponse>) {
+                if (response.isSuccessful) {
+                    val recipe = response.body()!!.recipe
+                    recipesArray.value = listOf(recipe)
+                }
             }
 
-            override fun onFailure(call: Call<RecipesAnswer>, t: Throwable) {
+            override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
                 
             }
 
         })
     }
+
 }

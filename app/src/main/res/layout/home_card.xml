@@ -6,6 +6,7 @@
 
     <data>
         <variable name="recipeObj" type="com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes" />
+        <variable name="homePageFragment" type="com.busraornek.yemektarifleriuygulamasi.ui.fragment.HomePageFragment" />
     </data>
 
 
@@ -37,10 +38,11 @@
             <!--imageview for displaying delete icon-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/goToDetail"
                 android:layout_width="250dp"
                 android:layout_height="35dp"
                 android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/imageViewDart"
+                android:layout_toStartOf="@+id/imageViewUpdate"
                 android:orientation="vertical">
 
                 <TextView
@@ -58,7 +60,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/imageViewDart"
+                android:id="@+id/imageViewUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

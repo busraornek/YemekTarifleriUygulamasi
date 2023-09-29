@@ -28,9 +28,10 @@
         <action
             android:id="@+id/action_detailFragment_to_homePageFragment"
             app:destination="@id/homePageFragment" />
+
         <argument
-            android:name="repices"
-            app:argType="com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes" />
+            android:name="recipeId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/addRecipeFragment"
@@ -48,5 +49,8 @@
         <argument
             android:name="recipes"
             app:argType="com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes" />
+        <action
+            android:id="@+id/action_recipeUpdateFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
     </fragment>
 </navigation>

@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
@@ -70,6 +71,7 @@ class HomePageFragment : Fragment(),SearchView.OnQueryTextListener {
         Navigation.toggle(R.id.action_homePageFragment_to_addRecipeFragment,it)
 
     }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

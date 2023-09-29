@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -31,6 +32,8 @@ class RecipeUpdateFragment : Fragment() {
        binding.recipeUpdateFragment = this
 
         binding.updateRecipesToolbar = "Güncelle"
+
+
 
         val bundle: RecipeUpdateFragmentArgs  by navArgs()
         val foodComing = bundle.recipes
