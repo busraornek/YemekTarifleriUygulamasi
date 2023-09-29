@@ -21,8 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private lateinit var view:DetailViewModel
-  //  private lateinit var adapter: RecipesAdapter
-
+    val args: DetailFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,15 +38,19 @@ class DetailFragment : Fragment() {
          */
         binding = FragmentDetailBinding.inflate(inflater,container,false)
         binding.detailRecipesToolbar = "Yemek Tarifi"
-        val bundle: DetailFragmentArgs by navArgs()
-        val getRecipe = bundle.recipeId
 
-        val recipeId = getRecipe
-        view.modelGetRecipeDetail(recipeId)
+        val recipeId = args.recipeId
+        view.modelGetRecipeDetail(recipeId)//Recipe type
 
-        view.recipeDetail.observe(viewLifecycleOwner){ recipeDetail->//Recipe type
-            binding.textViewName.text= recipeDetail.name
-            binding.textViewRecipe.text= recipeDetail.description
+        view.recipeDetail.observe(viewLifecycleOwner){
+
+           // binding.textViewName.text= recipeDetail.name
+          //  binding.textViewRecipe.text= recipeDetail.description
+            it.let {
+                binding.recipeObj = it
+
+            }
+
 
         }
         return binding.root

@@ -22,15 +22,7 @@ private lateinit var view:AddRecipeViewModel
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddRecipeBinding.inflate(inflater,container,false)
-/*
-        binding.buttonAdd.setOnClickListener{
-            view.buttonAdd(binding.editTextFoodAd.text.toString(), binding.editTextRecipe.text.toString())
-            val transition = AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
-            Navigation.findNavController(it).navigate(transition)
-            Toast.makeText(context,"Tarif Eklendi", Toast.LENGTH_SHORT).show()
-        }
 
- */
         binding.buttonAdd.setOnClickListener{
             view.buttonAdd(binding.editTextFoodName.text.toString(), binding.editTextRecipe.text.toString())
             val gecis = AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()

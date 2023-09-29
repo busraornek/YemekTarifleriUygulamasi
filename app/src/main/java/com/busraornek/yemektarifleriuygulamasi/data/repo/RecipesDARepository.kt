@@ -16,7 +16,7 @@ import retrofit2.Response
 class RecipesDARepository(var kdao:RecipesDao) {
 
     var recipesArray: MutableLiveData<List<Recipes>>
-    var recipeDetail: MutableLiveData<Recipes>
+    var recipeDetail: MutableLiveData<Recipes?>
     init {
         recipesArray = MutableLiveData()
         recipeDetail = MutableLiveData()
@@ -26,7 +26,7 @@ class RecipesDARepository(var kdao:RecipesDao) {
     fun bringTheFullRecipe() : MutableLiveData<List<Recipes>>{
         return recipesArray
     }
-    fun getDetail(): MutableLiveData<Recipes> {
+    fun getDetail(): MutableLiveData<Recipes?> {
         return recipeDetail
     }
 
@@ -75,9 +75,9 @@ class RecipesDARepository(var kdao:RecipesDao) {
     }fun recipeUpdate(recipe:Recipes) {
         kdao.recipeUpdate(recipe).enqueue(object : Callback<BaseRecipes>{
             override fun onResponse(call: Call<BaseRecipes>, response: Response<BaseRecipes>) {
-                val succes = response.body()?.status
-                val mesage = response.body()?.message
-                Log.e("yemek detay", "$succes - $mesage")
+                val response = response.body()
+
+                Log.e("yemek detay", "$response.succes - $response.mesage")
                 repicesGet()
             }
             override fun onFailure(call: Call<BaseRecipes>, t: Throwable) {
@@ -86,20 +86,23 @@ class RecipesDARepository(var kdao:RecipesDao) {
         })
 
     }
-    fun recipeDetail(id:Int){
+    fun recipeDetail(id:Int):Recipes?{
         kdao.recipeDetail(id).enqueue(object : Callback<DetailResponse>{
             override fun onResponse(call: Call<DetailResponse>, response: Response<DetailResponse>) {
-                if (response.isSuccessful) {
-                    val recipe = response.body()!!.recipe
-                    recipesArray.value = listOf(recipe)
+
+                val recipe = response.body()?.recipe
+                Log.e("detay","${response.message()} ")
+                recipeDetail.value = recipe
                 }
-            }
+
 
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
                 
             }
 
         })
+        return recipeDetail.value
+
     }
 
 }

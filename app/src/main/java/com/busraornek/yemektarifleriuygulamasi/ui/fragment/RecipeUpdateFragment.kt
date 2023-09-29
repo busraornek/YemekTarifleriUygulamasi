@@ -5,23 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.busraornek.yemektarifleriuygulamasi.R
 import com.busraornek.yemektarifleriuygulamasi.databinding.FragmentRecipeUpdateBinding
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.RecipeUpdateViewModel
-import com.busraornek.yemektarifleriuygulamasi.util.toggle
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecipeUpdateFragment : Fragment() {
     private lateinit var binding:FragmentRecipeUpdateBinding
     private lateinit var view : RecipeUpdateViewModel
+    private lateinit var detail:DetailFragment
 
 
     override fun onCreateView(
@@ -48,6 +44,8 @@ class RecipeUpdateFragment : Fragment() {
 
     fun buttonUpdate(recipeId: Int, recipeName: String, recipe: String) {
         view.recipeUpdate(recipeId,recipeName,recipe)
+       // detail.view.modelGetRecipeDetail(recipeId)
+
     }
 
 
