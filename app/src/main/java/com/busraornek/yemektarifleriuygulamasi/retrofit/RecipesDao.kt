@@ -14,7 +14,6 @@ import retrofit2.http.Query
 
 
 interface RecipesDao {
-
     @GET("get_recipes.php")
     suspend fun recipes(): Response<RecipesAnswer>
     @GET("search_recipe.php")
