@@ -76,6 +76,10 @@ dependencies {
     kapt ("com.google.dagger:hilt-compiler:2.44")
 
 
+    // Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+
     // Shimmer(used)
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
 
