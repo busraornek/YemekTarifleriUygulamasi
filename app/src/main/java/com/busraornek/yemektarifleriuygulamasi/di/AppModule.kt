@@ -12,16 +12,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
-
     @Provides
     @Singleton
-    fun provideRecipesDARepository(kdao: RecipesDao) : RecipesDARepository {
+    fun provideRecipesDARepository(kdao: RecipesDao): RecipesDARepository {
         return RecipesDARepository(kdao)
     }
-
     @Provides
     @Singleton
-    fun provideRecipesDao() : RecipesDao{
+    fun provideRecipesDao(): RecipesDao {
         return ApiUtils.getRecipesDao()
     }
 }

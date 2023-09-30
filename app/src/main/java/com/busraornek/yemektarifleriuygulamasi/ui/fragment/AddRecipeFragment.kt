@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 class AddRecipeFragment : Fragment() {
     private lateinit var binding: FragmentAddRecipeBinding
     private lateinit var viewModel: AddRecipeViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,25 +29,24 @@ class AddRecipeFragment : Fragment() {
 
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.buttonAdd.setOnClickListener {
             val foodName = binding.editTextFoodName.text.toString()
             val recipe = binding.editTextRecipe.text.toString()
-
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.addRecipes(foodName, recipe)
             }
-
             viewModel.recipeAdd.observe(viewLifecycleOwner) { recipe ->
                 if (recipe != null) {
-                    Toast.makeText(requireContext(), "Yemek Tarifi Eklendi", Toast.LENGTH_SHORT).show()
-                    val action = AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
+                    Toast.makeText(requireContext(), "Yemek Tarifi Eklendi", Toast.LENGTH_SHORT)
+                        .show()
+                    val action =
+                        AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
                     Navigation.findNavController(it).navigate(action)
                 } else {
-                    Toast.makeText(requireContext(), "Yemek Tarifi Eklenemedi", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Yemek Tarifi Eklenemedi", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

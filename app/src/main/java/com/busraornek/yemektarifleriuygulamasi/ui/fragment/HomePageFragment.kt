@@ -20,6 +20,7 @@ import com.busraornek.yemektarifleriuygulamasi.ui.adapter.RecipesAdapter
 import com.busraornek.yemektarifleriuygulamasi.ui.viewmodel.HomePageViewModel
 import com.busraornek.yemektarifleriuygulamasi.util.toggle
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
 class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding: FragmentHomePageBinding
@@ -33,7 +34,8 @@ class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
         val tempViewModel: HomePageViewModel by viewModels()
         viewModel = tempViewModel
         viewModel.getRecipes()
-        binding.toolbarHome.title = "Yemek Uygulaması"
+
+        binding.toolbarHome.title = "Yemek Tarifi Uygulaması"
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHome)
 
         viewModel.recipesList.observe(viewLifecycleOwner) {
@@ -47,6 +49,7 @@ class HomePageFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         // search
         observe()
+
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.toolbar_menu, menu)

@@ -42,7 +42,7 @@
                     android:layout_height="28dp"
                     android:text='Name'
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintBottom_toBottomOf="parent"

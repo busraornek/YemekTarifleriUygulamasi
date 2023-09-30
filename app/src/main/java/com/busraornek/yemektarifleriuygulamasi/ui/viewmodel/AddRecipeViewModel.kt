@@ -14,9 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddRecipeViewModel @Inject constructor(var krepo: RecipesDARepository) : ViewModel() {
-
     val recipeAdd = MutableLiveData<BaseRecipes>()
-
     suspend fun addRecipes(foodName: String, recipe: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = krepo.addRecipe(RecipeRequest(foodName, recipe))

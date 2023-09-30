@@ -9,10 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
-import com.busraornek.yemektarifleriuygulamasi.R
-import com.busraornek.yemektarifleriuygulamasi.data.entity.DetailResponse
 import com.busraornek.yemektarifleriuygulamasi.data.entity.Recipes
 import com.busraornek.yemektarifleriuygulamasi.databinding.FragmentDetailBinding
 import com.busraornek.yemektarifleriuygulamasi.databinding.RecipeUpdateDialogBinding
@@ -29,45 +26,34 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentDetailBinding.inflate(inflater, container, false)
-
         val tempViewModel: DetailViewModel by viewModels()
         view = tempViewModel
-        //binding.detailRecipesToolbar = "Yemek Tarifi"
-
         val recipeId = args.recipeId
-
         viewLifecycleOwner.lifecycleScope.launch {
             view.recipeDetail(recipeId)
         }
-
         view.recipeDetail.observe(viewLifecycleOwner) { recipe ->
             binding.textViewName.text = recipe?.recipe?.name
             binding.textViewRecipe.text = recipe?.recipe?.description
         }
-
         binding.button.setOnClickListener {
-            view.recipeDetail.value?.let { it1 -> alertGoster(recipe = it1.recipe) }
+            view.recipeDetail.value?.let { it1 -> alertShow(recipe = it1.recipe) }
         }
         return binding.root
     }
-
-    fun alertGoster(recipe: Recipes){
+    fun alertShow(recipe: Recipes) {
         val bindingDialog = RecipeUpdateDialogBinding.inflate(LayoutInflater.from(this.context))
         bindingDialog.editTextRecipeName.setText(recipe.name)
         bindingDialog.editTextRecipeDescription.setText(recipe.description)
-
         val dialog = this.context?.let { AlertDialog.Builder(it) }
-
-        dialog?.setTitle("Tarif Düzenle")
+        dialog?.setTitle("Tarif Güncelle")
         dialog?.setView(bindingDialog.root)
-        dialog?.setPositiveButton("Güncelle"){ dialogInterface, i->
+        dialog?.setPositiveButton("Güncelle") { dialogInterface, i ->
             val name = bindingDialog.editTextRecipeName.text.toString()
             val description = bindingDialog.editTextRecipeDescription.text.toString()
             //güncelleme
-
-            viewLifecycleOwner.lifecycleScope.launch{
+            viewLifecycleOwner.lifecycleScope.launch {
                 view.recipeUpdate(
                     Recipes(
                         id = recipe.id,
@@ -76,12 +62,10 @@ class DetailFragment : Fragment() {
                     )
                 )
             }
-
-            Toast.makeText(this.context,"$name düzenlendi",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.context, "$name güncellendi.", Toast.LENGTH_SHORT).show()
         }
-        dialog?.setNegativeButton("İptal"){ dialogInterface , i->
+        dialog?.setNegativeButton("İptal") { dialogInterface, i ->
         }
         dialog?.create()?.show()
-
     }
 }

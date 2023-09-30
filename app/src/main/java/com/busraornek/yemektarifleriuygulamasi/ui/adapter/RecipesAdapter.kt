@@ -1,6 +1,5 @@
 package com.busraornek.yemektarifleriuygulamasi.ui.adapter
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,21 +15,17 @@ class RecipesAdapter(
     var recipesList: List<Recipes>,
     var view: HomePageViewModel
 ) : RecyclerView.Adapter<RecipesAdapter.CardDesignHolder>() {
-
-    inner class CardDesignHolder(val binding: HomeCardBinding) : RecyclerView.ViewHolder(binding.root)
-
+    inner class CardDesignHolder(val binding: HomeCardBinding) :
+        RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesignHolder {
         val view = HomeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardDesignHolder(view)
     }
-
     override fun getItemCount(): Int {
         return recipesList.size
     }
-
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
         val repices = recipesList[position]
-
         holder.binding.textViewName.text = repices.name
         holder.binding.goToDetail.setOnClickListener {
             Log.e("Recipe Adapter", "satırCard tıklandı")

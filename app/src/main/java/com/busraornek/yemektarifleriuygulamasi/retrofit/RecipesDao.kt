@@ -17,17 +17,12 @@ interface RecipesDao {
 
     @GET("get_recipes.php")
     suspend fun recipes(): Response<RecipesAnswer>
-
     @GET("search_recipe.php")
     suspend fun foodSearch(@Query("query") query: String): Response<RecipesX>
-
     @GET("get_recipe_detail.php")
     suspend fun recipeDetail(@Query("id") id: Int): Response<DetailResponse>
-
     @POST("add_recipe.php")
     suspend fun addRecipe(@Body request: RecipeRequest): Response<BaseRecipes>
-
-
     @POST("update_recipe.php")
     suspend fun recipeUpdate(@Body request: Recipes): Response<BaseRecipes>
 

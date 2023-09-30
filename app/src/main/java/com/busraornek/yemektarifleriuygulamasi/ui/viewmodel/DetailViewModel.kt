@@ -14,12 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(var krepo: RecipesDARepository) : ViewModel() {
-
     var recipeDetail = MutableLiveData<DetailResponse?>()
     var recipeUpdateMessage = MutableLiveData<String?>()
-
     suspend fun recipeDetail(id: Int) {
-
         viewModelScope.launch(Dispatchers.IO) {
             val response = krepo.recipeDetail(id)
             withContext(Dispatchers.Main) {
@@ -30,9 +27,7 @@ class DetailViewModel @Inject constructor(var krepo: RecipesDARepository) : View
             }
         }
     }
-
     suspend fun recipeUpdate(recipe: Recipes) {
-
         viewModelScope.launch(Dispatchers.IO) {
             val response = krepo.recipeUpdate(recipe)
             withContext(Dispatchers.Main) {
