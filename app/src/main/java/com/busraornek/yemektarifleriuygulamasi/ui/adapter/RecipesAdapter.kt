@@ -28,7 +28,6 @@ class RecipesAdapter(
         val repices = recipesList[position]
         holder.binding.textViewName.text = repices.name
         holder.binding.goToDetail.setOnClickListener {
-            Log.e("Recipe Adapter", "satırCard tıklandı")
             val passing = HomePageFragmentDirections.actionHomePageFragmentToDetailFragment(recipeId = repices.id)
             Navigation.toggle(it, passing)
         }

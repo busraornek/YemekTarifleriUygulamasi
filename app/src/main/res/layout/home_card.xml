@@ -10,8 +10,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:cardCornerRadius="5dp"
@@ -21,39 +21,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/goToDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:text='Name'
+                android:textAlignment="center"
+                android:textColor="@color/dark_blue"
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-            <!--imageview for displaying delete icon-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goToDetail"
-                android:layout_width="280dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textViewName"
-                    android:layout_width="250dp"
-                    android:layout_height="28dp"
-                    android:text='Name'
-                    android:textAlignment="center"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

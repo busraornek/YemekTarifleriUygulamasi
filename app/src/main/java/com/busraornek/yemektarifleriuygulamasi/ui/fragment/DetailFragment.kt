@@ -47,6 +47,7 @@ class DetailFragment : Fragment() {
         bindingDialog.editTextRecipeName.setText(recipe.name)
         bindingDialog.editTextRecipeDescription.setText(recipe.description)
         val dialog = this.context?.let { AlertDialog.Builder(it) }
+
         dialog?.setTitle("Tarif Güncelle")
         dialog?.setView(bindingDialog.root)
         dialog?.setPositiveButton("Güncelle") { dialogInterface, i ->

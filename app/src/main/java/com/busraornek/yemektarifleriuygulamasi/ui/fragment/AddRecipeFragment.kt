@@ -39,7 +39,7 @@ class AddRecipeFragment : Fragment() {
             }
             viewModel.recipeAdd.observe(viewLifecycleOwner) { recipe ->
                 if (recipe != null) {
-                    Toast.makeText(requireContext(), "Yemek Tarifi Eklendi", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), " Yemek Tarifi Eklendi", Toast.LENGTH_SHORT)
                         .show()
                     val action =
                         AddRecipeFragmentDirections.actionAddRecipeFragmentToHomePageFragment()
